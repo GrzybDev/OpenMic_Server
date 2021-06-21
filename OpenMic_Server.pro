@@ -19,7 +19,9 @@ FORMS += \
     mainwindow.ui
 
 TRANSLATIONS += \
-    OpenMic_Server_en_US.ts
+    OpenMic_Server_en_US.ts \
+    OpenMic_Server_pl_PL.ts
+
 CONFIG += lrelease
 CONFIG += embed_translations
 
