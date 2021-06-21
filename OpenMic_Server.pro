@@ -10,10 +10,12 @@ CONFIG += c++11
 
 SOURCES += \
     src/main.cpp \
+    src/net/listener.cpp \
     src/net/listeners/command.cpp \
     src/ui/MainWindow/mainwindow.cpp
 
 HEADERS += \
+    src/net/listener.h \
     src/net/listeners/command.h \
     src/ui/MainWindow/mainwindow.h
 
