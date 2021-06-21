@@ -1,0 +1,102 @@
+name: Debug Build
+
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build_linux:
+    name: Linux Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Prepare environment
+        uses: jurplel/install-qt-action@v2
+
+      - name: Install CQTDeployer
+        run: sudo snap install cqtdeployer
+      
+      - name: Generate Makefile
+        run: qmake OpenMic_Server.pro -config debug
+        
+      - name: Build for Linux
+        run: make
+      
+      - name: Deploy build
+        run: /snap/cqtdeployer/current/cqtdeployer.sh -bin OpenMic_Server
+      
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v2.2.1
+        with:
+          name: Linux_Release
+          path: ./DistributionKit/
+      
+      - name: Generate installer
+        run: |
+          rm -rf ./DistributionKit
+          /snap/cqtdeployer/current/cqtdeployer.sh -bin OpenMic_Server qif
+      
+      - name: Upload installer artifact
+        uses: actions/upload-artifact@v2.2.1
+        with:
+          name: Linux_Installer_amd64
+          path: DistributionKit/InstallerOpenMic_Server.run
+  
+  build_windows:
+    runs-on: windows-latest
+    name: Windows ${{ matrix.arch_name }} Build
+    strategy:
+      matrix:
+        include:
+          - arch_name: x86
+            arch: win32_msvc2019
+          - arch_name: x64
+            arch: win64_msvc2019_64
+    
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Prepare environment
+        uses: jurplel/install-qt-action@v2
+        with:
+          arch: ${{ matrix.arch }}
+      
+      - name: Generate Makefiles
+        shell: cmd
+        run: |
+          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.arch_name }}
+          qmake OpenMic_Server.pro -config debug
+      
+      - name: Build
+        shell: cmd
+        run: |
+          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.arch_name }}
+          nmake
+      
+      - name: Deploy build
+        shell: cmd
+        run: |
+          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.arch_name }}
+          mkdir final_build
+          copy debug\OpenMic_Server.exe final_build
+          windeployqt ./final_build/OpenMic_Server.exe
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v2.2.1
+        with:
+          name: Windows_Release_${{ matrix.arch_name }}
+          path: ./final_build/
+      
+      - name: Generate installer
+        uses: joncloud/makensis-action@v3.4
+        with:
+          script-file: "windows_installer.nsi"
+
+      - name: Upload installer artifact
+        uses: actions/upload-artifact@v2.2.1
+        with:
+          name: Windows_Installer_${{ matrix.arch_name }}
+          path: OpenMic_Windows_Installer.exe

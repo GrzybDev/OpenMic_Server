@@ -1,0 +1,12 @@
+{
+    "description": "Server application for OpenMic, designed for use on desktop.",
+    "highlights": [
+        "Uses Qt library",
+		"Compatible with Linux and Windows",
+		"Plays OpenMic client output on virtual audio device"
+    ],
+    "public": true,
+    "project_site": "https://grzybmic.web.app/",
+    "icon": "icon.ico",
+    "show": true
+}

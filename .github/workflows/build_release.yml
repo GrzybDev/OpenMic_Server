@@ -1,0 +1,137 @@
+name: Release Build
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build_linux:
+    name: Linux Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Prepare environment
+        uses: jurplel/install-qt-action@v2
+
+      - name: Install CQTDeployer
+        run: sudo snap install cqtdeployer
+      
+      - name: Generate Makefile
+        run: qmake OpenMic_Server.pro -config release
+      
+      - name: Build for Linux
+        run: make
+      
+      - name: Deploy build
+        run: /snap/cqtdeployer/current/cqtdeployer.sh -bin OpenMic_Server
+      
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v2.2.1
+        with:
+          name: Linux_Release
+          path: ./DistributionKit/
+      
+      - name: Prepare build for release
+        run: |
+          cd ./DistributionKit/
+          zip -r OpenMic_Release.zip *
+      
+      - name: Upload build to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: DistributionKit/OpenMic_Release.zip
+          asset_name: OpenMic_Linux_Portable_amd64.zip
+          tag: ${{ github.ref }}
+          overwrite: true
+      
+      - name: Generate installer
+        run: |
+          rm -rf ./DistributionKit
+          /snap/cqtdeployer/current/cqtdeployer.sh -bin OpenMic_Server qif
+        
+      - name: Upload installer to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: DistributionKit/InstallerOpenMic.run
+          asset_name: OpenMic_Linux_Setup_amd64.run
+          tag: ${{ github.ref }}
+          overwrite: true
+  
+  build_windows:
+    runs-on: windows-latest
+    name: Windows ${{ matrix.arch_name }} Build
+    strategy:
+      matrix:
+        include:
+          - arch_name: x86
+            arch: win32_msvc2019
+          - arch_name: x64
+            arch: win64_msvc2019_64
+    
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Prepare environment
+        uses: jurplel/install-qt-action@v2
+        with:
+          arch: ${{ matrix.arch }}
+      
+      - name: Generate Makefiles
+        shell: cmd
+        run: |
+          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.arch_name }}
+          qmake OpenMic_Server.pro -config debug
+      
+      - name: Build
+        shell: cmd
+        run: |
+          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.arch_name }}
+          nmake
+      
+      - name: Deploy build
+        shell: cmd
+        run: |
+          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.arch_name }}
+          mkdir final_build
+          copy debug\OpenMic_Server.exe final_build
+          windeployqt ./final_build/OpenMic_Server.exe
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v2.2.1
+        with:
+          name: Windows_Release_${{ matrix.arch_name }}
+          path: ./final_build/
+
+      - name: Prepare for release
+        run: Compress-Archive final_build\* final_build.zip
+      
+      - name: Upload build to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: final_build.zip
+          asset_name: OpenMic_Windows_Portable_${{ matrix.arch_name }}.zip
+          tag: ${{ github.ref }}
+          overwrite: true
+      
+      - name: Move vcredist away from final_build
+        shell: cmd
+        run: move final_build\vc_redist* .
+      
+      - name: Generate installer
+        uses: joncloud/makensis-action@v3.4
+        with:
+          script-file: "windows_installer.nsi"
+      
+      - name: Upload installer to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: OpenMic_Windows_Installer.exe
+          asset_name: OpenMic_Windows_Setup_${{ matrix.arch_name }}.exe
+          tag: ${{ github.ref }}
+          overwrite: true
