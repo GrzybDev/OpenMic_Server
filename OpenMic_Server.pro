@@ -9,18 +9,18 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    main.cpp \
-    mainwindow.cpp
+    src/main.cpp \
+    src/ui/MainWindow/mainwindow.cpp
 
 HEADERS += \
-    mainwindow.h
+    src/ui/MainWindow/mainwindow.h
 
 FORMS += \
-    mainwindow.ui
+    src/ui/MainWindow/mainwindow.ui
 
 TRANSLATIONS += \
-    OpenMic_Server_en_US.ts \
-    OpenMic_Server_pl_PL.ts
+    src/lang/OpenMic_Server_en_US.ts \
+    src/lang/OpenMic_Server_pl_PL.ts
 
 CONFIG += lrelease
 CONFIG += embed_translations
