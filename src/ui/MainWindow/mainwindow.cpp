@@ -6,6 +6,9 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    network = new Network(this);
+    network->AddListener(COMMAND);
 }
 
 MainWindow::~MainWindow()
