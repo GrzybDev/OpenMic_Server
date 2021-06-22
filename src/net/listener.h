@@ -3,12 +3,6 @@
 
 #include <QObject>
 
-enum LISTENER_STATUS {
-    LISTENER_SUCCESS,
-    LISTENER_FAILURE_PORT_USED,
-    LISTENER_FAILURE_UNKNOWN
-};
-
 class Listener : public QObject
 {
     Q_OBJECT
@@ -17,8 +11,8 @@ public:
 
     bool isListening;
 
-    virtual LISTENER_STATUS StartListening() = 0;
-    virtual void StopListening() = 0;
+    virtual bool StartListening() = 0;
+    virtual bool StopListening() = 0;
 
 signals:
 

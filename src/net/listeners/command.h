@@ -2,6 +2,9 @@
 #define COMMAND_H
 
 #include <QObject>
+#include <QtNetwork/QTcpServer>
+#include <QMessageBox>
+#include <QtNetwork/QNetworkInterface>
 #include "../listener.h"
 
 class Command : public Listener
@@ -10,11 +13,14 @@ class Command : public Listener
 public:
     explicit Command(QObject *parent = nullptr);
 
-    LISTENER_STATUS StartListening();
-    void StopListening();
+    bool StartListening();
+    bool StopListening();
 
 signals:
 
+private:
+    QObject *context;
+    QTcpServer *server = nullptr;
 };
 
 #endif // COMMAND_H
