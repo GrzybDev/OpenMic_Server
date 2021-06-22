@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -12,11 +12,13 @@ SOURCES += \
     src/main.cpp \
     src/net/listener.cpp \
     src/net/listeners/command.cpp \
+    src/net/network.cpp \
     src/ui/MainWindow/mainwindow.cpp
 
 HEADERS += \
     src/net/listener.h \
     src/net/listeners/command.h \
+    src/net/network.h \
     src/ui/MainWindow/mainwindow.h
 
 FORMS += \
