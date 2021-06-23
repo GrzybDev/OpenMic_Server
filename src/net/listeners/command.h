@@ -3,9 +3,12 @@
 
 #include <QObject>
 #include <QtNetwork/QTcpServer>
+#include <QtNetwork/QTcpSocket>
+#include <QtNetwork/QAbstractSocket>
 #include <QMessageBox>
 #include <QtNetwork/QNetworkInterface>
 #include "../listener.h"
+#include "../packet.h"
 
 class Command : public Listener
 {
@@ -18,9 +21,16 @@ public:
 
 signals:
 
+private slots:
+    void initClient();
+
+    void readSocket();
+    void discardSocket();
+
 private:
-    QObject *context;
     QTcpServer *server = nullptr;
+
+    bool isConnected = false;
 };
 
 #endif // COMMAND_H

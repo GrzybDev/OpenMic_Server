@@ -2,8 +2,9 @@
 
 Command::Command(QObject *parent) : Listener()
 {
-    context = parent;
     server = new QTcpServer(this);
+
+    connect(server, &QTcpServer::newConnection, this, &Command::initClient);
 }
 
 bool Command::StartListening() {
@@ -41,4 +42,29 @@ bool Command::StartListening() {
 
 bool Command::StopListening() {
     return false;
+}
+
+void Command::initClient()
+{
+    if (!isConnected) {
+        QTcpSocket *socket = server->nextPendingConnection();
+
+        connect(socket, &QTcpSocket::readyRead, this, &Command::readSocket);
+        connect(socket, &QTcpSocket::disconnected, this, &Command::discardSocket);
+
+        isConnected = true;
+        qDebug("Client connected!");
+    }
+}
+
+void Command::readSocket() {
+    QTcpSocket* socket = reinterpret_cast<QTcpSocket*>(sender());
+    const QByteArray data = socket->readAll();
+
+    Packet* packet = new Packet(this);
+    packet->getPacket(data);
+}
+
+void Command::discardSocket() {
+
 }
