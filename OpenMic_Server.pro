@@ -13,12 +13,18 @@ SOURCES += \
     src/net/listener.cpp \
     src/net/listeners/command.cpp \
     src/net/network.cpp \
+    src/net/packet.cpp \
+    src/net/packet_client.cpp \
+    src/net/packets/hello.cpp \
     src/ui/MainWindow/mainwindow.cpp
 
 HEADERS += \
     src/net/listener.h \
     src/net/listeners/command.h \
     src/net/network.h \
+    src/net/packet.h \
+    src/net/packet_client.h \
+    src/net/packets/hello.h \
     src/ui/MainWindow/mainwindow.h
 
 FORMS += \
