@@ -43,3 +43,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RC_ICONS += src/res/icon.ico
+
+VERSION = 0.0.1
+DEFINES += APP_VERSION=\\\"$$VERSION\\\"
