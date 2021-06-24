@@ -1,6 +1,5 @@
 #include "packet_client.h"
 #include "packets/hello.h"
-#include "iostream"
 
 ClientPacket::ClientPacket(QObject *parent) : QObject(parent)
 {
@@ -21,7 +20,6 @@ bool ClientPacket::parseNext(QByteArray data)
 
             switch (data.data()[0]) {
                 case CLIENT_HELLO:
-                    std::cout << "HELLO PACKET" << std::endl;
                     finalPacket = new PacketHello();
                     break;
             }
