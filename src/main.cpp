@@ -8,6 +8,11 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
+    QCoreApplication::setApplicationName("OpenMic Server");
+    QCoreApplication::setApplicationVersion(APP_VERSION);
+    QCoreApplication::setOrganizationDomain("grzybdev.github.io");
+    QCoreApplication::setOrganizationName("GrzybDev");
+
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
     for (const QString &locale : uiLanguages) {
