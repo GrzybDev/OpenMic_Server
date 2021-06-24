@@ -16,14 +16,46 @@ bool ClientPacket::parseNext(QByteArray data)
                 return false;
             break;
         case 1:
-            std::cout << data.data()[0] << std::endl;
+            packetType = data.data()[0];
 
-            switch (data.data()[0]) {
+            switch (packetType) {
                 case CLIENT_HELLO:
                     finalPacket = new PacketHello();
                     break;
             }
 
+            break;
+        default:
+            QString entry(data);
+
+            switch (packetType) {
+                case CLIENT_HELLO:
+                    PacketHello* packet_temp = static_cast<PacketHello*>(finalPacket);
+                    QStringList info = entry.split("\n");
+
+                    switch (entryCount) {
+                        case 2:
+                            packet_temp->clientVersion = info[0];
+                            packet_temp->clientBuildID = info[1].toInt();
+                            break;
+                        case 3:
+                            packet_temp->isDebug = entry == "true";
+                            break;
+                        case 4:
+                            if (info[0] == "Android") packet_temp->clientOS = ANDROID;
+                            packet_temp->clientOSVersion = info[1].toInt();
+                            break;
+                        case 5:
+                            packet_temp->clientManufacturer = info[0];
+                            packet_temp->clientModel = info[1];
+                            break;
+                        case 6:
+                            packet_temp->clientFingerprint = entry;
+                            break;
+                    }
+
+                    break;
+            }
             break;
     }
 
