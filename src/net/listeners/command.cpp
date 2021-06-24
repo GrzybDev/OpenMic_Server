@@ -1,4 +1,5 @@
 #include "command.h"
+#include "../packets/hello.h"
 
 Command::Command(QObject *parent) : Listener()
 {
@@ -62,7 +63,9 @@ void Command::readSocket() {
     const QByteArray data = socket->readAll();
 
     Packet* packet = new Packet(this);
-    packet->getPacket(data);
+    PacketHello* hello = static_cast<PacketHello*>(packet->getPacket(data));
+
+    qDebug(hello->isClientVersionCompatible() ? "Compatible!" : "Not compatible!");
 }
 
 void Command::discardSocket() {
