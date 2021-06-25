@@ -86,5 +86,5 @@ jobs:
       - name: Upload installer artifact
         uses: actions/upload-artifact@v2.2.1
         with:
-          name: Windows_Installer_${{ matrix.arch_name }}
+          name: Windows_Installer_x64
           path: OpenMic_Windows_Installer.exe
