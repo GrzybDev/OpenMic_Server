@@ -9,6 +9,7 @@
 #include <QtNetwork/QNetworkInterface>
 #include "../listener.h"
 #include "../packet.h"
+#include "receiver.h"
 
 class Command : public Listener
 {

@@ -63,11 +63,17 @@ void Command::readSocket() {
     const QByteArray data = socket->readAll();
 
     Packet* packet = new Packet(this);
-    PacketHello* hello = static_cast<PacketHello*>(packet->getPacket(data));
+    PacketHello* hello = static_cast<PacketHello*>(packet->parseClientPacket(data));
 
-    qDebug(hello->isClientVersionCompatible() ? "Compatible!" : "Not compatible!");
+    if (hello->isClientVersionCompatible()) {
+        Receiver* receiver = new Receiver();
+        receiver->StartListening();
+
+        socket->write(packet->getConnectPacket(receiver->getPort()));
+    }
 }
 
 void Command::discardSocket() {
-
+    isConnected = false;
+    qDebug("Client disconnected!");
 }
