@@ -9,9 +9,11 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/audio/player.cpp \
     src/main.cpp \
     src/net/listener.cpp \
     src/net/listeners/command.cpp \
+    src/net/listeners/receiver.cpp \
     src/net/network.cpp \
     src/net/packet.cpp \
     src/net/packet_client.cpp \
@@ -19,8 +21,10 @@ SOURCES += \
     src/ui/MainWindow/mainwindow.cpp
 
 HEADERS += \
+    src/audio/player.h \
     src/net/listener.h \
     src/net/listeners/command.h \
+    src/net/listeners/receiver.h \
     src/net/network.h \
     src/net/packet.h \
     src/net/packet_client.h \
