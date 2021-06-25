@@ -56,7 +56,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: DistributionKit/InstallerOpenMic.run
+          file: DistributionKit/InstallerOpenMic_Server.run
           asset_name: OpenMic_Linux_Setup_amd64.run
           tag: ${{ github.ref }}
           overwrite: true
