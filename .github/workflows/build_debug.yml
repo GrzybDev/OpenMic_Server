@@ -46,7 +46,7 @@ jobs:
       - name: Upload installer artifact
         uses: actions/upload-artifact@v2.2.1
         with:
-          name: OpenMic_Linux_Installer_amd64
+          name: Linux_Installer_amd64
           path: DistributionKit/InstallerOpenMic_Server.run
   
   build_windows:
