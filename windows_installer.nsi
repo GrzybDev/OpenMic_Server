@@ -75,23 +75,6 @@ Section "VB-Audio Virtual Cable" vbcable
 SectionEnd
 
 ;--------------------------------
-; Section - Microsoft Visual C++ 2019
-
-Section "Microsoft Visual C++" msvc
-    SetOutPath "$INSTDIR\redist\vcredist\2019"
-    File /nonfatal "vc_redist.x64.exe"
-    File /nonfatal "vc_redist.x86.exe"
-
-    DetailPrint "Installing Visual C++ 2019 redist..."
-
-    ${If} ${RunningX64}
-        ExecWait '"$INSTDIR\redist\vcredist\2019\vc_redist.x64.exe" /Q'
-    ${Else}
-        ExecWait '"$INSTDIR\redist\vcredist\2019\vc_redist.x86.exe" /Q'
-    ${EndIf}
-SectionEnd
-
-;--------------------------------
 ; Section - Shortcut
 
 Section "Desktop Shortcut" DeskShort
@@ -103,14 +86,12 @@ SectionEnd
 
 ;Language strings
 LangString DESC_DeskShort ${LANG_ENGLISH} "Create Shortcut on Desktop."
-LangString DESC_msvc ${LANG_ENGLISH} "Microsoft Visual C++ 2019 (required to run OpenMic)"
 LangString DESC_vbcable ${LANG_ENGLISH} "VB-Cable (www.vb-cable.com) by VB-Audio spawns virtual audio devices that are required in order to be able to use OpenMic. This project is a donationware, all participations are welcome."
 LangString DESC_adb ${LANG_ENGLISH} "Android Debug Bridge is required if you want to connect phone via USB"
 
 ;Assign language strings to sections
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
     !insertmacro MUI_DESCRIPTION_TEXT ${DeskShort} $(DESC_DeskShort)
-    !insertmacro MUI_DESCRIPTION_TEXT ${msvc} $(DESC_msvc)
     !insertmacro MUI_DESCRIPTION_TEXT ${vbcable} $(DESC_vbcable)
     !insertmacro MUI_DESCRIPTION_TEXT ${adb} $(DESC_adb)
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
