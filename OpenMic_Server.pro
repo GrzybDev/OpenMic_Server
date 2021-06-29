@@ -19,7 +19,8 @@ SOURCES += \
     src/net/packet.cpp \
     src/net/packet_client.cpp \
     src/net/packets/hello.cpp \
-    src/ui/MainWindow/mainwindow.cpp
+    src/ui/MainWindow/mainwindow.cpp \
+    src/ui/SetupWizard/setupwizard.cpp
 
 HEADERS += \
     src/audio/player.h \
@@ -31,7 +32,8 @@ HEADERS += \
     src/net/packet.h \
     src/net/packet_client.h \
     src/net/packets/hello.h \
-    src/ui/MainWindow/mainwindow.h
+    src/ui/MainWindow/mainwindow.h \
+    src/ui/SetupWizard/setupwizard.h
 
 FORMS += \
     src/ui/MainWindow/mainwindow.ui
