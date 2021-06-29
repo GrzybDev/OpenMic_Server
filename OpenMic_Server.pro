@@ -10,6 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     src/audio/player.cpp \
+    src/config.cpp \
     src/main.cpp \
     src/net/listener.cpp \
     src/net/listeners/command.cpp \
@@ -22,6 +23,7 @@ SOURCES += \
 
 HEADERS += \
     src/audio/player.h \
+    src/config.h \
     src/net/listener.h \
     src/net/listeners/command.h \
     src/net/listeners/receiver.h \
