@@ -49,5 +49,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RC_ICONS += src/res/icon.ico
 
-VERSION = 0.0.1
+VERSION = 1.0
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
