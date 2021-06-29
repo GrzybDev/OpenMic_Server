@@ -35,7 +35,7 @@ jobs:
       - name: Upload build artifact
         uses: actions/upload-artifact@v2.2.1
         with:
-          name: Linux_Release
+          name: Linux_Release_amd64
           path: ./DistributionKit/
       
       - name: Generate installer
