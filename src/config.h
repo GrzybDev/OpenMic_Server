@@ -11,12 +11,21 @@ class Config final : public QObject
 public:
 	explicit Config(QObject *parent);
 	~Config() override;
+
+    QVariant getValue(QString category, QString settingname);
+    void setValue(QString category, QString settingname, QVariant value);
+
+    void revertChanges();
+    void applyChanges();
+    bool isModified();
+
 private:
 	void loadConfigMap();
 	void readConfig();
 
 	QSettings settings;
 	QMap<QString, QMap<QString, QVariant>> configData;
+    QMap<QString, QMap<QString, QVariant>> configMap;
 
-	QMap<QString, QList<QString>> configMap;
+    QList<QString> modifiedValues;
 };
