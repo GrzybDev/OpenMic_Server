@@ -2,23 +2,34 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "../../net/network.h"
+#include "../../config.h"
+#include "../SetupWizard/setupwizard.h"
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
+
+namespace Ui
+{
+	class MainWindow;
+}
+
 QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow
+class MainWindow final : public QMainWindow
 {
-    Q_OBJECT
+Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+	explicit MainWindow(QWidget* parent = nullptr);
+	~MainWindow() override;
+
+    Config* appConfig;
 
 private:
-    Ui::MainWindow *ui;
+	Ui::MainWindow* ui;
 
-    Network *network;
+    SetupWizard* setupWizard;
+
+    void initVariables();
+    void initApp();
 };
 #endif // MAINWINDOW_H
