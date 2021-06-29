@@ -37,7 +37,6 @@ FORMS += \
     src/ui/MainWindow/mainwindow.ui
 
 TRANSLATIONS += \
-    src/lang/OpenMic_Server_en_US.ts \
     src/lang/OpenMic_Server_pl_PL.ts
 
 CONFIG += lrelease
