@@ -21,10 +21,14 @@ void MainWindow::initVariables() {
 }
 
 void MainWindow::initApp() {
-    if (appConfig->getValue("General", "FirstRunCompleted").toBool()) {
-        // First run completed
-    } else {
+    if (!appConfig->getValue("General", "FirstRunCompleted").toBool()) {
+        // Run setup wizard, because it's first time user launches this app
         setupWizard = new SetupWizard(this);
         setupWizard->exec();
+
+        appConfig->setValue("General", "FirstRunCompleted", true);
+        appConfig->applyChanges();
     }
+
+    show();
 }
