@@ -11,6 +11,7 @@ CONFIG += c++11
 SOURCES += \
     src/audio/player.cpp \
     src/config.cpp \
+    src/linux.cpp \
     src/main.cpp \
     src/net/listener.cpp \
     src/net/listeners/command.cpp \
@@ -20,11 +21,13 @@ SOURCES += \
     src/net/packet_client.cpp \
     src/net/packets/hello.cpp \
     src/ui/MainWindow/mainwindow.cpp \
-    src/ui/SetupWizard/setupwizard.cpp
+    src/ui/SetupWizard/setupwizard.cpp \
+    src/windowtools.cpp
 
 HEADERS += \
     src/audio/player.h \
     src/config.h \
+    src/linux.h \
     src/net/listener.h \
     src/net/listeners/command.h \
     src/net/listeners/receiver.h \
@@ -33,7 +36,8 @@ HEADERS += \
     src/net/packet_client.h \
     src/net/packets/hello.h \
     src/ui/MainWindow/mainwindow.h \
-    src/ui/SetupWizard/setupwizard.h
+    src/ui/SetupWizard/setupwizard.h \
+    src/windowtools.h
 
 FORMS += \
     src/ui/MainWindow/mainwindow.ui
