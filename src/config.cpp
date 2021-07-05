@@ -15,6 +15,7 @@ void Config::loadConfigMap()
 {
     QMap<QString, QVariant> generalList;
     generalList["FirstRunCompleted"] = false;
+    generalList["LoadModuleOnStart"] = false;
 
     QMap<QString, QVariant> audioList;
     audioList["Device"] = "";
