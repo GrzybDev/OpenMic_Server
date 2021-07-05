@@ -8,7 +8,7 @@ int main(int argc, char* argv[])
 {
 	QApplication a(argc, argv);
 
-	QCoreApplication::setApplicationName("OpenMic Server");
+    QCoreApplication::setApplicationName("pl.grzybdev.openmic.server");
 	QCoreApplication::setApplicationVersion(APP_VERSION);
 	QCoreApplication::setOrganizationDomain("grzybdev.github.io");
 	QCoreApplication::setOrganizationName("GrzybDev");
