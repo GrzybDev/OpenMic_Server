@@ -5,8 +5,11 @@
 #include <QLabel>
 #include <QVBoxLayout>
 #include <QComboBox>
+#include <QCheckBox>
 #include <QAudioDeviceInfo>
 #include <QNetworkInterface>
+#include "../../linux.h"
+#include "../../windowtools.h"
 
 class SetupWizard : public QWizard
 {
@@ -19,11 +22,14 @@ public:
 private slots:
     void saveAudioDevice(QString deviceName);
     void saveNetworkDevice(QString deviceName);
+    void setLoadKernelModuleState(int state);
+    void onPageChanged(int id);
 
 private:
     QWidget* parent_widget;
 
     QWizardPage* createIntroPage();
+    QWizardPage* createLinuxKernelModulePage();
     QWizardPage* createAudioDevicePage();
     QWizardPage* createNetworkDevicePage();
     QWizardPage* createEndingPage();
