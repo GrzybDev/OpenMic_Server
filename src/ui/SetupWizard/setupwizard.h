@@ -26,16 +26,18 @@ private slots:
     void onPageChanged(int id);
 
 private:
-    QWidget* parent_widget;
+    QWidget *parent_widget;
 
-    QWizardPage* createIntroPage();
-    QWizardPage* createLinuxKernelModulePage();
-    QWizardPage* createAudioDevicePage();
-    QWizardPage* createNetworkDevicePage();
-    QWizardPage* createEndingPage();
+    QWizardPage *createIntroPage();
+    QWizardPage *createLinuxKernelModulePage();
+    QWizardPage *createAudioDevicePage();
+    QWizardPage *createNetworkDevicePage();
+    QWizardPage *createEndingPage();
 
-    void addAudioDevicesToCombobox(QComboBox* comboBox);
-    void addNetworkDevicesToCombobox(QComboBox* comboBox);
+    QComboBox *audioComboBox;
+
+    void addAudioDevicesToCombobox();
+    void addNetworkDevicesToCombobox(QComboBox *comboBox);
 };
 
 #endif // SETUPWIZARD_H
