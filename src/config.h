@@ -3,14 +3,13 @@
 #include <QObject>
 #include <QSettings>
 
-
 class Config final : public QObject
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	explicit Config(QObject *parent);
-	~Config() override;
+    explicit Config(QObject *parent);
+    ~Config() override;
 
     QVariant getValue(QString category, QString settingname);
     void setValue(QString category, QString settingname, QVariant value);
@@ -20,11 +19,11 @@ public:
     bool isModified();
 
 private:
-	void loadConfigMap();
-	void readConfig();
+    void loadConfigMap();
+    void readConfig();
 
-	QSettings settings;
-	QMap<QString, QMap<QString, QVariant>> configData;
+    QSettings settings;
+    QMap<QString, QMap<QString, QVariant>> configData;
     QMap<QString, QMap<QString, QVariant>> configMap;
 
     QList<QString> modifiedValues;

@@ -2,14 +2,13 @@
 #include "iostream"
 
 Config::Config(QObject *parent)
-	: QObject(parent)
+    : QObject(parent)
 {
-	loadConfigMap();
-	readConfig();
+    loadConfigMap();
+    readConfig();
 }
 
-Config::~Config()
-= default;
+Config::~Config() = default;
 
 void Config::loadConfigMap()
 {
@@ -20,10 +19,9 @@ void Config::loadConfigMap()
     QMap<QString, QVariant> audioList;
     audioList["Device"] = "";
 
-	configMap["General"] = generalList;
+    configMap["General"] = generalList;
     configMap["Audio"] = audioList;
 }
-
 
 void Config::readConfig()
 {
@@ -33,7 +31,7 @@ void Config::readConfig()
     int keysCount = keys.count();
 
     for (int x = 0; x < keysCount; x++)
-	{
+    {
         QString category = keys.at(x);
         QMap<QString, QVariant> data;
 
@@ -42,7 +40,8 @@ void Config::readConfig()
 
         int entryCount = entryKeys.count();
 
-        for (int y = 0; y < entryCount; y++) {
+        for (int y = 0; y < entryCount; y++)
+        {
             QString entryName = entryKeys.at(y);
             QVariant entryDefaultValue = entryMap[entryName];
 
@@ -53,22 +52,27 @@ void Config::readConfig()
     }
 }
 
-QVariant Config::getValue(QString category, QString settingname) {
+QVariant Config::getValue(QString category, QString settingname)
+{
     return configData[category][settingname];
 }
 
-void Config::setValue(QString category, QString settingname, QVariant value) {
+void Config::setValue(QString category, QString settingname, QVariant value)
+{
     configData[category][settingname] = value;
     modifiedValues.append(category + "/" + settingname);
 }
 
-void Config::revertChanges() {
+void Config::revertChanges()
+{
     modifiedValues.clear();
     readConfig();
 }
 
-void Config::applyChanges() {
-    foreach (auto valueChanged, modifiedValues) {
+void Config::applyChanges()
+{
+    foreach (auto valueChanged, modifiedValues)
+    {
         QStringList valuePath = valueChanged.split("/");
         settings.setValue(valueChanged, configData[valuePath[0]][valuePath[1]]);
     }
@@ -77,6 +81,7 @@ void Config::applyChanges() {
     readConfig();
 }
 
-bool Config::isModified() {
+bool Config::isModified()
+{
     return modifiedValues.count() != 0;
 }

@@ -5,29 +5,31 @@
 #include "../../config.h"
 #include "../SetupWizard/setupwizard.h"
 
+#define FIRST_RUN_COMPLETED "General", "FirstRunCompleted"
+
 QT_BEGIN_NAMESPACE
 
 namespace Ui
 {
-	class MainWindow;
+    class MainWindow;
 }
 
 QT_END_NAMESPACE
 
 class MainWindow final : public QMainWindow
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
-	explicit MainWindow(QWidget* parent = nullptr);
-	~MainWindow() override;
+    explicit MainWindow(QWidget *parent = nullptr);
+    ~MainWindow() override;
 
-    Config* appConfig;
+    Config *appConfig;
 
 private:
-	Ui::MainWindow* ui;
+    Ui::MainWindow *ui;
 
-    SetupWizard* setupWizard;
+    SetupWizard *setupWizard;
 
     void initVariables();
     void initApp();

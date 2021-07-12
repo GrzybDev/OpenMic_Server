@@ -2,9 +2,9 @@
 
 WindowTools::WindowTools(QObject *parent) : QObject(parent)
 {
-
 }
 
-void WindowTools::disableTitleBarButtons(QWidget *widget) {
+void WindowTools::disableTitleBarButtons(QWidget *widget)
+{
     widget->setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
 }
