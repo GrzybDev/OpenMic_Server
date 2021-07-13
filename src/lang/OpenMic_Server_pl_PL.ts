@@ -108,8 +108,80 @@ Process exited with status code: %1</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../ui/MainWindow/mainwindow.ui" line="14"/>
-        <source>MainWindow</source>
+        <location filename="../ui/MainWindow/mainwindow.ui" line="26"/>
+        <source>OpenMic Server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/MainWindow/mainwindow.ui" line="60"/>
+        <source>Device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/MainWindow/mainwindow.ui" line="69"/>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/MainWindow/mainwindow.ui" line="78"/>
+        <location filename="../ui/MainWindow/mainwindow.ui" line="158"/>
+        <source>About</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/MainWindow/mainwindow.ui" line="87"/>
+        <location filename="../ui/MainWindow/mainwindow.ui" line="138"/>
+        <source>Donate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/MainWindow/mainwindow.ui" line="103"/>
+        <source>Connect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/MainWindow/mainwindow.ui" line="108"/>
+        <source>Disconnect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/MainWindow/mainwindow.ui" line="113"/>
+        <source>Exit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/MainWindow/mainwindow.ui" line="118"/>
+        <source>Audio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/MainWindow/mainwindow.ui" line="123"/>
+        <source>Network</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/MainWindow/mainwindow.ui" line="128"/>
+        <source>System</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/MainWindow/mainwindow.ui" line="133"/>
+        <source>Devices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/MainWindow/mainwindow.ui" line="143"/>
+        <source>To Author</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/MainWindow/mainwindow.ui" line="148"/>
+        <source>FAQ</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/MainWindow/mainwindow.ui" line="153"/>
+        <source>Website</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
