@@ -53,7 +53,10 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-RC_ICONS += src/res/icon.ico
+RC_ICONS += src/res/icons/app_icon.ico
 
 VERSION = 1.0
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
+
+RESOURCES += \
+    src/res/app_resources.qrc
